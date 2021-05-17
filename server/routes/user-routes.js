@@ -15,6 +15,7 @@ router.get('/users', (req, res) => {
   const params = {
     TableName: table
   };
+  //scan returns all items in the table
   dynamodb.scan(params, (err, data) => {
     if (err) {
       res.status(500).json(err); // an error occurred
@@ -29,7 +30,9 @@ router.get('/users/:username', (req, res) => {
   console.log(`Querying for thought(s) from ${req.params.username}.`);
   const params = {
     TableName: table,
+    //this is our query parameter
     KeyConditionExpression: "#un = :user",
+    //these create aliases for our columns
     ExpressionAttributeNames: {
       "#un": "username",
       "#ca": "createdAt",
@@ -38,7 +41,9 @@ router.get('/users/:username', (req, res) => {
     ExpressionAttributeValues: {
       ":user": req.params.username
     },
-    ProjectionExpression: "#th, #ca"
+    //shows which attributes will be returned
+    ProjectionExpression: "#th, #ca",
+    ScanIndexForward: false
   };
 
   dynamodb.query(params, (err, data) => {
@@ -136,7 +141,7 @@ router.delete('/users/:time/:username', (req, res) => {
 // router.put('/users/:username', (req, res) => {
 //   res.json({ "which": "which" })
 // });
-  // const { time, username } = req.params;
+// const { time, username } = req.params;
 
 //   var table = "Movies";
 
