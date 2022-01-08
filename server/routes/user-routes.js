@@ -24,7 +24,7 @@ router.get('/users', (req, res) => {
     }
   });
 })
-
+console.log(test)
 // get thoughts from a user
 router.get('/users/:username', (req, res) => {
   console.log(`Querying for thought(s) from ${req.params.username}.`);
