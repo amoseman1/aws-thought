@@ -3,7 +3,7 @@ const router = express.Router();
 const AWS = require("aws-sdk");
 const awsConfig = {
   region: "us-east-2",
-  endpoint: "http://localhost:8000",
+  // endpoint: "http://localhost:8000",
 
 };
 AWS.config.update(awsConfig);
@@ -24,13 +24,13 @@ router.get('/users', (req, res) => {
     }
   });
 })
-console.log(test)
+
 // get thoughts from a user
 router.get('/users/:username', (req, res) => {
   console.log(`Querying for thought(s) from ${req.params.username}.`);
   const params = {
     TableName: table,
-    //this is our query parameter
+    //this is our query parameter - like the WHERE clasue in SQL
     KeyConditionExpression: "#un = :user",
     //these create aliases for our columns
     ExpressionAttributeNames: {

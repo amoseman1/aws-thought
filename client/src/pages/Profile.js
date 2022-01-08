@@ -17,7 +17,7 @@ const Profile = props => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [thoughts, setThoughts] = useState([{
     username: userParam,
-    createdAt: '', 
+    createdAt: '',
     thought: ''
   }]);
 
@@ -32,7 +32,7 @@ const Profile = props => {
       setIsLoaded(true);
     }
     fetchData();
-  }, []);
+  }, [userParam]);
 
   return (
     <div>
@@ -44,10 +44,10 @@ const Profile = props => {
 
       <div className="flex-row justify-space-between mb-3">
         <div className="col-12 mb-3 col-lg-8">
-        {!isLoaded ? (
+          {!isLoaded ? (
             <div>Loading...</div>
           ) : (
-          <ThoughtList thoughts={thoughts} title={`${userParam}'s thoughts...`} />
+            <ThoughtList thoughts={thoughts} title={`${userParam}'s thoughts...`} />
           )}
         </div>
       </div>
